@@ -1,40 +1,72 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PotPage from "./PotPage";
+import data from "./state/data.json";
 import { fetchPots } from "./state/actions";
 import "./App.css";
 
+const mapStateToProps = state => {
+  return {
+    pots: state.pots
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPot: () =>
+      dispatch({
+        type: "FETCH_POTS_SUCCESS",
+        response: data
+      })
+  };
+};
+
 class App extends Component {
+  state = {
+    limit: 3
+  };
+
+  componentDidMount() {
+    fetchPots();
+  }
+
+  componentWillUnmount() {}
+
   render() {
+    const { pots } = this.props;
+    const { limit } = this.state;
     return (
       <main className="App">
-        <header className="App-header">
-          <h1 className="App-title">Buypass</h1>
-        </header>
-        <section className="App-content">
-          <p>
-            Vi har gjort klar en Redux store, med en action for å hente data fra
-            et API. Du skal trigge den actionen, og hente ut innholdet i feltet
-            `pots`.
-          </p>
-          <p>
-            Scopet inkluderer å koble dette viewet til Redux, å iterere over
-            dataen og å lage nødvendige komponenter for å vise dataen i
-            browseren.
-          </p>
-          <p>
-            Det er opp til deg hvordan du ønsker å strukturere komponenter,
-            style viewet og hvordan du presenterer dataene. Det er også opp til
-            deg om du ønsker å ta i bruk eksterne bibliotek ut over de som
-            allerede finnes i prosjektet. Vi har laget en wireframe som en grov
-            skisse. Vi ønsker at det normalt vises potter fra fire spill, og at
-            man kan expande det til å vise alle pottene inne i samme viewet.
-          </p>
-          <img alt="App wireframe" src={"./BUYPASS_RECRUITING.png"} />
-          <h2>Lykke til!</h2>
-        </section>
+        <div>
+          <h1 className="App-header">Norsk Tipping Pottoversikt</h1>
+          <div className="center-block">
+            <PotPage pots={pots} limit={limit} />
+            <button
+              className="Load-more"
+              onClick={() => {
+                let newLimit;
+                limit === pots.length
+                  ? (newLimit = 3)
+                  : (newLimit = pots.length);
+                this.setState({
+                  limit: newLimit
+                });
+              }}
+            >
+              {`Vis ${limit !== pots.length ? "fler" : "færre"} produkter`}
+            </button>
+          </div>
+        </div>
       </main>
     );
   }
 }
 
-export default App;
+App.defaultProps = {
+  pots: []
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

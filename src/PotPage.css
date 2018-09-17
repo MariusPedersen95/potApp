@@ -1,0 +1,8 @@
+.PotPage-items {
+  display: inline-table;
+  text-align: center;
+}
+
+.PotPage-item {
+  display: inline-table;
+}

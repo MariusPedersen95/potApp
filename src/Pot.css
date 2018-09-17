@@ -1,0 +1,23 @@
+.pot {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid black;
+  width: 250px;
+  height: 169px;
+  margin: 35px;
+}
+
+.pot-gameName {
+  color: black;
+  text-align: left;
+  font-size: 24px;
+}
+
+.pot-title {
+  text-align: left;
+}
+
+.pot-date {
+  text-align: left;
+}

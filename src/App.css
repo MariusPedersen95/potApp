@@ -1,13 +1,15 @@
 .App {
-  background-color: #424242;
-  text-align: center;
 }
 
+.center-block {
+  margin: auto;
+  width: 50%;
+}
 .App-header {
-  background-color: #222;
   height: 70px;
   padding: 20px;
-  color: white;
+  color: black;
+  text-align: center;
 }
 
 .App-title {
@@ -15,8 +17,19 @@
 }
 
 .App-content {
-  color: #ECEFF1;
+  color: #eceff1;
   font-size: large;
   padding: 25px;
 }
 
+.Load-more {
+  width: 150px;
+  line-height: 40px;
+  border-radius: 2px;
+  margin: 0 auto;
+  display: block;
+  background: black;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
